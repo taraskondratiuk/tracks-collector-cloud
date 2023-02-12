@@ -1,0 +1,19 @@
+steps:
+  - name: 'gcr.io/cloud-builders/mvn'
+    id: Build
+    args:
+      - package
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      - gcloud
+      - functions
+      - deploy
+      - function-bot
+      - --entry-point=ua.gladiator.bot.Main
+      - --runtime=java11
+      - --memory=128MB
+      - --max-instances=30
+      - --set-env-vars=TELEGRAM_BOT_TOKEN=${_TELEGRAM_BOT_TOKEN}
+      - --region=europe-central2
+      - --source=target/deployment
+      - --trigger-http
