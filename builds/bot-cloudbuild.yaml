@@ -17,3 +17,5 @@ steps:
       - --region=europe-central2
       - --source=target/deployment
       - --trigger-http
+      - --allow-unauthenticated
+      - --security-level=secure-optional
